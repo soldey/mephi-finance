@@ -54,7 +54,7 @@ public class WalletService {
         Category categoryInstance = categoryService.selectOne(userId, category);
         categoryInstance.setSpent(categoryInstance.spent() + amount);
         wallet.setBalance(wallet.balance() - amount);
-        if (categoryInstance.budget() - categoryInstance.spent() + categoryInstance.income() < 0) {
+        if (categoryInstance.budget() - categoryInstance.spent() + categoryInstance.income() < 0 && categoryInstance.budget() != 0) {
             userService.notify(userId, "You are out of your budget for " + categoryInstance.name());
         }
     }
